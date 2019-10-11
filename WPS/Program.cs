@@ -17,8 +17,6 @@ namespace WPS
 				Console.WriteLine(product);
 
 				// var products = await productService.List();
-
-				File.WriteAllText("../../../config.json", "test");
 			}
 		}
 
