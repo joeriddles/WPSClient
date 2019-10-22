@@ -1,8 +1,10 @@
-﻿using Newtonsoft.Json;
+﻿using Microsoft.Extensions.DependencyInjection;
+using Newtonsoft.Json;
 using System;
 using System.IO;
 using System.Threading.Tasks;
 using WPS.Models;
+using WPS.Services;
 
 namespace WPS
 {
@@ -10,17 +12,24 @@ namespace WPS
 	{
 		static async Task Main()
 		{
-			using (var client = WpsClient.CreateClient(getToken()))
+			/*var serviceProvider = new ServiceCollection()
+				.AddSingleton<IProductService, ProductService>()
+				.AddSingleton<IItemService, ItemService>()
+				.BuildServiceProvider();
+			IProductService productService = serviceProvider.GetService<IProductService>();*/
+
+			using (var client = WpsClient.CreateClient(GetToken()))
 			{
-				IProductervice productService = new ProductService(client);
-				var product = await productService.GetById(1);
+				var productService = BaseService<Item>.ProductService(client);
+
+				var product = await productService.GetById(163);
 				Console.WriteLine(product);
 
 				// var products = await productService.List();
 			}
 		}
 
-		static string getToken()
+		static string GetToken()
 		{
 			string configPath = "../../../config.json";
 			if (File.Exists(configPath))

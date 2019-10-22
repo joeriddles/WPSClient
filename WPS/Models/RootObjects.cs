@@ -2,9 +2,9 @@
 
 namespace WPS.Models
 {
-	public class RootObjects<T>
+	public class RootObjects<BaseModel>
 	{
-		public List<T> Data;
+		public List<BaseModel> Data;
 		public Meta Meta;
 	}
 }

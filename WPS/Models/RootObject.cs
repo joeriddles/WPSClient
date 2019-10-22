@@ -1,7 +1,7 @@
 ﻿namespace WPS.Models
 {
-	public class RootObject<T>
+	public class RootObject<BaseModel>
 	{
-		public T Data { get; set; }
+		public BaseModel Data { get; set; }
 	}
 }
